@@ -1,0 +1,10 @@
+---
+- hosts: coreswitches
+  connection: local
+
+  tasks:
+    - name: run show version
+      ios_command:
+        commands: show version
+      register: results
+    - copy: content={{results.stdout_lines}} dest=./veroutput.json
